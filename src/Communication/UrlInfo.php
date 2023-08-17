@@ -1,6 +1,6 @@
 <?php
 
-namespace Velsym\Routing\Communication;
+namespace Velsym\Communication;
 
 readonly class UrlInfo
 {
