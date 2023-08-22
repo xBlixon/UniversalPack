@@ -8,7 +8,7 @@ abstract class BaseMiddleware
 
     abstract public function handle();
 
-    protected function redirect(string $path)
+    protected function redirect(string $path): void
     {
         header("Location: $path");
         die();
