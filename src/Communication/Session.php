@@ -27,7 +27,8 @@ class Session
 
     public function get(string $key): mixed
     {
-        return unserialize($_SESSION[$key] ?? "") ?? NULL;
+        if(isset($_SESSION[$key])) return unserialize($_SESSION[$key]);
+        return NULL;
     }
 
     public function setFlash(mixed $value): self
