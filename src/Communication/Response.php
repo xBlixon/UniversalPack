@@ -6,7 +6,7 @@ class Response
 {
     private static ?Response $instance = NULL;
     private array $headers = [];
-    private int $resposeCode = 200;
+    private int $responseCode = 200;
     private string $body = "";
     private ?string $redirectRouteName = NULL;
 
@@ -47,14 +47,14 @@ class Response
         return $this->body;
     }
 
-    public function getResposeCode(): int
+    public function getResponseCode(): int
     {
-        return $this->resposeCode;
+        return $this->responseCode;
     }
 
-    public function setResposeCode(int $resposeCode): void
+    public function setResponseCode(int $responseCode): void
     {
-        $this->resposeCode = $resposeCode;
+        $this->responseCode = $responseCode;
     }
 
     public function getRedirectRouteName(): ?string
