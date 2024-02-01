@@ -39,4 +39,18 @@ final class DependencyBuilderTest extends TestCase
         $dep->addDependency("First\\Dependency");
         $dep->addDependency("Second\\Dependency");
     }
+
+    /**
+     * Tests situation in which parameter is set
+     * before any is set dependency.
+     */
+    #[Test]
+    #[TestDox("Error on setting parameter without dependency")]
+    public function paramWithoutDependency(): void
+    {
+        $this->expectException(DependencyBuilderError::class);
+        $this->expectExceptionMessage("Dependency is not set.");
+        $dep = new DependencyBuilder();
+        $dep->setParam("param", "value");
+    }
 }
