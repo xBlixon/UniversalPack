@@ -24,4 +24,15 @@ final class DependencyBuilderTest extends TestCase
         $dep = new DependencyBuilder();
         $dep->setClass("Some\\Class");
     }
+
+    #[Test]
+    #[TestDox("Error on setting dependency after an empty dependency")]
+    public function emptyDependency(): void
+    {
+        $this->expectException(DependencyBuilderError::class);
+        $this->expectExceptionMessage("Previous dependency has no class.");
+        $dep = new DependencyBuilder();
+        $dep->addDependency("First\\Dependency");
+        $dep->addDependency("Second\\Dependency");
+    }
 }
