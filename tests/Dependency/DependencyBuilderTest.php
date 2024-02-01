@@ -25,6 +25,10 @@ final class DependencyBuilderTest extends TestCase
         $dep->setClass("Some\\Class");
     }
 
+    /**
+     * Tests situation in which user tries to set a new dependency
+     * before the previous one got the declaration of class.
+     */
     #[Test]
     #[TestDox("Error on setting dependency after an empty dependency")]
     public function emptyDependency(): void
