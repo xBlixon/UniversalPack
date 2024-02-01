@@ -19,7 +19,7 @@ class DependencyBuilder
     {
         if (
             $this->currentDependency !== NULL
-            && !isset($this->dependencies[$this->currentDependency]['class'])
+            && !$this->isClassSet()
         ) {
             throw new DependencyBuilderError("Previous dependency has no class.");
         }
@@ -30,9 +30,9 @@ class DependencyBuilder
 
     public function setClass(string $class): self
     {
-        $this->isDependency();
-        if (isset($this->dependencies[$this->currentDependency]['class'])) {
-            throw new DependencyBuilderError("Multiple class declaration for one dependency.");
+        $this->checkDependency();
+        if ($this->isClassSet()) {
+            throw new DependencyBuilderError("Multiple class declarations for one dependency.");
         }
         $this->dependencies[$this->currentDependency]['class'] = $class;
         return $this;
@@ -40,7 +40,10 @@ class DependencyBuilder
 
     public function setParam(string $paramName, mixed $value): self
     {
-        $this->isDependency();
+        $this->checkDependency();
+        if(!$this->isClassSet()) {
+            throw new DependencyBuilderError("Tried to set parameter before class is declared.");
+        }
         if (!isset($this->dependencies[$this->currentDependency]['params'])) {
             $this->dependencies[$this->currentDependency]['params'] = [];
         }
@@ -53,10 +56,15 @@ class DependencyBuilder
         return $this->dependencies;
     }
 
-    private function isDependency(): void
+    private function checkDependency(): void
     {
         if (!$this->currentDependency) {
             throw new DependencyBuilderError("Dependency is not set.");
         }
+    }
+
+    private function isClassSet(): bool
+    {
+        return isset($this->dependencies[$this->currentDependency]['class']);
     }
 }
