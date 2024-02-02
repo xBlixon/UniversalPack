@@ -23,8 +23,23 @@ final class DependencyBuilderTest extends TestCase
         $this->expectException(DependencyBuilderError::class);
         $this->expectExceptionMessage("Previous dependency has no class.");
         $dep = new DependencyBuilder();
-        $dep->addDependency("Foo\\Bar");
-        $dep->addDependency("Bar\\Baz");
+        $dep->addDependency("Foo\\Bar")
+            ->addDependency("Bar\\Baz");
+    }
+
+    /**
+     * Tests if error is thrown when dependency has 2 or more classes.
+     */
+    #[Test]
+    #[TestDox("Error on 2 or more classes for single dependency")]
+    public function multipleClasses(): void
+    {
+        $this->expectException(DependencyBuilderError::class);
+        $this->expectExceptionMessage("Multiple class declarations for one dependency");
+        $dep = new DependencyBuilder();
+        $dep->addDependency("Foo\\Bar")
+            ->setClass("Foo\\Baz")
+            ->setClass("Bar\\Baz");
     }
 
     /**
@@ -51,8 +66,7 @@ final class DependencyBuilderTest extends TestCase
         $this->expectExceptionMessage("Tried to set parameter before class is declared.");
         $dep = new DependencyBuilder();
         $dep->addDependency("Foo\\Bar")
-            ->setParam("foo", "baz")
-            ;
+            ->setParam("foo", "baz");
     }
 
     /**
