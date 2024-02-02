@@ -41,6 +41,21 @@ final class DependencyBuilderTest extends TestCase
     }
 
     /**
+     * Tests if error is thrown when parameter is set before class.
+     */
+    #[Test]
+    #[TestDox("Error on setting parameter before class is set")]
+    public function paramBeforeClass(): void
+    {
+        $this->expectException(DependencyBuilderError::class);
+        $this->expectExceptionMessage("Tried to set parameter before class is declared.");
+        $dep = new DependencyBuilder();
+        $dep->addDependency("Foo\\Bar")
+            ->setParam("foo", "baz")
+            ;
+    }
+
+    /**
      * Tests situation in which parameter is set
      * before any is set dependency.
      */
@@ -53,4 +68,5 @@ final class DependencyBuilderTest extends TestCase
         $dep = new DependencyBuilder();
         $dep->setParam("param", "value");
     }
+
 }
