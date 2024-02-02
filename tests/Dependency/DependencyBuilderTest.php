@@ -13,19 +13,6 @@ use Velsym\Dependency\DependencyBuilderError;
 final class DependencyBuilderTest extends TestCase
 {
     /**
-     * Tests situation in which class is declared before dependency.
-     */
-    #[Test]
-    #[TestDox("Error on setting class before the dependency is set")]
-    public function errorClassBeforeDependency(): void
-    {
-        $this->expectException(DependencyBuilderError::class);
-        $this->expectExceptionMessage("Dependency is not set.");
-        $dep = new DependencyBuilder();
-        $dep->setClass("Some\\Class");
-    }
-
-    /**
      * Tests situation in which user tries to set a new dependency
      * before the previous one got the declaration of class.
      */
@@ -38,6 +25,19 @@ final class DependencyBuilderTest extends TestCase
         $dep = new DependencyBuilder();
         $dep->addDependency("First\\Dependency");
         $dep->addDependency("Second\\Dependency");
+    }
+
+    /**
+     * Tests situation in which class is declared before dependency.
+     */
+    #[Test]
+    #[TestDox("Error on setting class before the dependency is set")]
+    public function errorClassBeforeDependency(): void
+    {
+        $this->expectException(DependencyBuilderError::class);
+        $this->expectExceptionMessage("Dependency is not set.");
+        $dep = new DependencyBuilder();
+        $dep->setClass("Some\\Class");
     }
 
     /**
