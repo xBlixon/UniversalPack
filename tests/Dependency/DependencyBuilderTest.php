@@ -23,8 +23,8 @@ final class DependencyBuilderTest extends TestCase
         $this->expectException(DependencyBuilderError::class);
         $this->expectExceptionMessage("Previous dependency has no class.");
         $dep = new DependencyBuilder();
-        $dep->addDependency("First\\Dependency");
-        $dep->addDependency("Second\\Dependency");
+        $dep->addDependency("Foo\\Bar");
+        $dep->addDependency("Bar\\Baz");
     }
 
     /**
@@ -37,7 +37,7 @@ final class DependencyBuilderTest extends TestCase
         $this->expectException(DependencyBuilderError::class);
         $this->expectExceptionMessage("Dependency is not set.");
         $dep = new DependencyBuilder();
-        $dep->setClass("Some\\Class");
+        $dep->setClass("Foo\\Bar");
     }
 
     /**
@@ -66,7 +66,7 @@ final class DependencyBuilderTest extends TestCase
         $this->expectException(DependencyBuilderError::class);
         $this->expectExceptionMessage("Dependency is not set.");
         $dep = new DependencyBuilder();
-        $dep->setParam("param", "value");
+        $dep->setParam("foo", "bar");
     }
 
 }
