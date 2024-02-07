@@ -71,7 +71,7 @@ final class ResponseTest extends TestCase
      * Checks if redirect route name setter and getter works.
      */
     #[Test]
-    #[TestDox("Setting-Getting Body")]
+    #[TestDox("Setting-Getting Redirect route name")]
     public function redirectRouteName(): void
     {
         $this->assertNull($this->response->getRedirectRouteName());
