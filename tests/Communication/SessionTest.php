@@ -52,4 +52,15 @@ final class SessionTest extends TestCase
         $this->assertSame("One time message", $this->session->getFlash());
         $this->assertNull($this->session->getFlash());
     }
+
+    /**
+     * Tests if session is getting cleared out.
+     */
+    #[Test]
+    #[TestDox("Flushing session")]
+    public function flushing(): void
+    {
+        $this->session->flush();
+        $this->assertNull($this->session->get('foo'));
+    }
 }
