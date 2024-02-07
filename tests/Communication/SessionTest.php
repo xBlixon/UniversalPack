@@ -16,16 +16,28 @@ final class SessionTest extends TestCase
     protected function setUp(): void
     {
         $this->session = Session::getInstance();
+        $this->session->set('foo', 'bar');
     }
 
     /**
-     * This test check setting-getting functionality.
+     * This test checks setting-getting functionality.
      */
     #[Test]
     #[TestDox("Setting-Getting")]
-    public function settingGetting()
+    public function settingGetting(): void
     {
-        $this->session->set('foo', 'bar');
         $this->assertSame('bar', $this->session->get('foo'));
+    }
+
+    /**
+     * Tests if purging removes values from session.
+     */
+    #[Test]
+    #[TestDox("Purging")]
+    public function purging(): void
+    {
+        $this->assertSame('bar', $this->session->get('foo'));
+        $this->session->purge('foo');
+        $this->assertNull($this->session->get('foo'));
     }
 }
