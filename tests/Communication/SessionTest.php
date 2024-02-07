@@ -63,4 +63,15 @@ final class SessionTest extends TestCase
         $this->session->flush();
         $this->assertNull($this->session->get('foo'));
     }
+
+    /**
+     * Tests if session closes correctly.
+     */
+    #[Test]
+    #[TestDox("Session closing")]
+    public function closing(): void
+    {
+        $this->session->close();
+        $this->assertTrue(session_status() === PHP_SESSION_NONE);
+    }
 }
