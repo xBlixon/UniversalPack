@@ -9,5 +9,10 @@ use Velsym\Communication\Response;
 #[CoversClass(Response::class)]
 final class ResponseTest extends TestCase
 {
+    private Response $response;
 
+    protected function setUp(): void
+    {
+        $this->response = Response::getInstance();
+    }
 }
