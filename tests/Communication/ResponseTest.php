@@ -55,5 +55,15 @@ final class ResponseTest extends TestCase
         $this->assertSame("Hello world!", $this->response->getBody());
     }
 
-
+    /**
+     * Checks if response code setter and getter works.
+     */
+    #[Test]
+    #[TestDox("Setting-Getting Response code")]
+    public function code(): void
+    {
+        $this->assertSame(200, $this->response->getResponseCode());
+        $this->response->setResponseCode(202);
+        $this->assertSame(202, $this->response->getResponseCode());
+    }
 }
