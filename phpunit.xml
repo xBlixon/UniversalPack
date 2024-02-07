@@ -16,6 +16,9 @@
         <testsuite name="dependency">
             <directory>tests/Dependency</directory>
         </testsuite>
+        <testsuite name="communication">
+            <directory>tests/Communication</directory>
+        </testsuite>
     </testsuites>
 
     <source restrictDeprecations="true" restrictNotices="true" restrictWarnings="true">

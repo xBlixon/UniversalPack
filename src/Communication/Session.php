@@ -49,6 +49,12 @@ class Session
         return $this;
     }
 
+    public function flush(): self
+    {
+        session_unset();
+        return $this;
+    }
+
     public function close(): void
     {
         session_destroy();

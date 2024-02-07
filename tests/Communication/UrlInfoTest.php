@@ -1,6 +1,6 @@
 <?php
 
-namespace Dependency;
+namespace Communication;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
@@ -21,5 +21,22 @@ final class UrlInfoTest extends TestCase
         $path = "/home/page/1";
         $url = new UrlInfo("$path?color=blue&font=serif");
         $this->assertSame($path, $url->path);
+    }
+
+    /**
+     * Tests if resource path is extracted correctly.
+     */
+    #[Test]
+    #[TestDox("Ignoring http(s) prefix")]
+    public function http(): void
+    {
+        $expected = "/page/1";
+        $host = "example.com";
+        $urn = $host.$expected;
+        $http = new UrlInfo("http://$urn");
+        $this->assertSame($expected, $http->path);
+        $https = new UrlInfo("https://$urn");
+        $this->assertSame($expected, $https->path);
+
     }
 }
