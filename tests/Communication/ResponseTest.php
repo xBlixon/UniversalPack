@@ -42,4 +42,18 @@ final class ResponseTest extends TestCase
             $this->response->getHeaders()
         );
     }
+
+
+    /**
+     * Checks if body setter and getter works.
+     */
+    #[Test]
+    #[TestDox("Setting-Getting Body")]
+    public function body(): void
+    {
+        $this->response->setBody("Hello world!");
+        $this->assertSame("Hello world!", $this->response->getBody());
+    }
+
+
 }
