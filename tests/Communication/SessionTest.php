@@ -40,4 +40,16 @@ final class SessionTest extends TestCase
         $this->session->purge('foo');
         $this->assertNull($this->session->get('foo'));
     }
+
+    /**
+     * This test checks if flashing works as expected.
+     */
+    #[Test]
+    #[TestDox("Flashing")]
+    public function flashing(): void
+    {
+        $this->session->setFlash("One time message");
+        $this->assertSame("One time message", $this->session->getFlash());
+        $this->assertNull($this->session->getFlash());
+    }
 }
