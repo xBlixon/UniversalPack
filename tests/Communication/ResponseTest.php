@@ -66,4 +66,16 @@ final class ResponseTest extends TestCase
         $this->response->setResponseCode(202);
         $this->assertSame(202, $this->response->getResponseCode());
     }
+
+    /**
+     * Checks if redirect route name setter and getter works.
+     */
+    #[Test]
+    #[TestDox("Setting-Getting Body")]
+    public function redirectRouteName(): void
+    {
+        $this->assertNull($this->response->getRedirectRouteName());
+        $this->response->setRedirectRouteName("homepage");
+        $this->assertSame("homepage", $this->response->getRedirectRouteName());
+    }
 }
